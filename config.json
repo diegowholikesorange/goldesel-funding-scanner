@@ -1,0 +1,12 @@
+{
+  "minSpotDepthUsd": 50000,
+  "minPerpDepthUsd": 100000,
+  "minOiUsd": 50000000,
+  "maxBasisPct": 0.5,
+  "maxSpreadPct": 0.05,
+  "minHoldCycles": 6,
+  "minNetYieldPerCycle": 0.01,
+  "minFundingRate8h": 0.01,
+  "oiFallThresholdPct": 5,
+  "scanIntervalSeconds": 90
+}

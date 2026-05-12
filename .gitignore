@@ -1,0 +1,9 @@
+node_modules/
+dist/
+dashboard/main.js
+logs/
+.env
+.claude/
+.remember/
+.playwright-mcp/
+screenshot.png

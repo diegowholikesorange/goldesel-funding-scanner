@@ -1,0 +1,284 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: monospace;
+  font-size: 13px;
+  background: #0d1117;
+  color: #c9d1d9;
+  padding: 16px;
+}
+
+header { margin-bottom: 24px; }
+h1 { font-size: 18px; color: #e6edf3; margin-bottom: 6px; }
+h2 { font-size: 13px; color: #8b949e; margin-bottom: 0; }
+
+.meta { color: #8b949e; font-size: 12px; margin-bottom: 4px; }
+.meta.stale { color: #f85149; font-weight: bold; }
+
+.banner {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-left: 3px solid #d29922;
+  padding: 6px 10px;
+  margin: 4px 0;
+  font-size: 12px;
+  color: #e3b341;
+  display: flex;
+  justify-content: space-between;
+}
+.banner button { background: none; border: none; color: #8b949e; cursor: pointer; }
+
+section { margin-bottom: 28px; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* ─── Market Sentiment ─────────────────── */
+.sentiment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.sentiment-card {
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-radius: 5px;
+  padding: 14px 16px;
+}
+
+.card-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #484f58;
+  margin-bottom: 12px;
+}
+
+.card-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #e6edf3;
+  margin-bottom: 3px;
+  transition: color 0.5s;
+}
+
+.card-sub {
+  font-size: 11px;
+  color: #6e7681;
+}
+
+/* Direction meter */
+.meter-wrap { margin-bottom: 10px; }
+
+.meter-track {
+  position: relative;
+  height: 5px;
+  background: linear-gradient(to right, #3d1515 0%, #2a1a1a 30%, #21262d 50%, #1a2a1a 70%, #133d1b 100%);
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+
+.meter-needle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  background: #e6edf3;
+  border-radius: 50%;
+  transition: left 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 0 0 2px #0d1117, 0 0 6px rgba(230, 237, 243, 0.4);
+}
+
+.meter-ends {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #3d444d;
+}
+
+/* Heat segments */
+.heat-segs {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 10px;
+}
+
+.heat-seg {
+  flex: 1;
+  height: 6px;
+  background: #1c2128;
+  border-radius: 1px;
+  transition: background 0.5s;
+}
+
+.heat-seg.on-1 { background: #1a7f37; }
+.heat-seg.on-2 { background: #3fb950; }
+.heat-seg.on-3 { background: #d29922; }
+.heat-seg.on-4 { background: #f0883e; }
+.heat-seg.on-5 { background: #f85149; }
+
+/* OI trends */
+.oi-trends {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 11px;
+}
+.oi-rise { color: #3fb950; }
+.oi-stable { color: #484f58; }
+.oi-fall { color: #f85149; }
+
+/* ─── Tile Map ─────────────────────────── */
+.tile-summary { font-size: 11px; color: #8b949e; }
+
+#tile-map {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 22px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  cursor: default;
+  user-select: none;
+  position: relative;
+  transition: transform 0.1s ease, opacity 1.5s ease;
+}
+
+.tile:hover {
+  transform: scale(1.3);
+  z-index: 50;
+}
+
+.tile-pass {
+  background: #0f2e13;
+  color: #3fb950;
+  border: 1px solid #238636;
+}
+.tile-pass:hover {
+  background: #1a4a22;
+  border-color: #3fb950;
+  color: #56d364;
+}
+
+.tile-fail {
+  background: #111418;
+  color: #3d444d;
+  border: 1px solid #1c2128;
+}
+.tile-fail:hover {
+  background: #1c2128;
+  color: #8b949e;
+  border-color: #30363d;
+}
+
+.tile-pending {
+  background: #0d1117;
+  color: #21262d;
+  border: 1px solid #161b22;
+  opacity: 0.45;
+}
+
+/* ─── Scan progress bar ────────────────── */
+#scan-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+#scan-progress-bar {
+  flex: 1;
+  height: 2px;
+  background: #161b22;
+  border-radius: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+#scan-progress-bar::after {
+  content: "";
+  display: block;
+  height: 100%;
+  background: #238636;
+  width: var(--pct, 0%);
+  transition: width 0.4s ease;
+}
+
+.scan-progress-text {
+  font-size: 10px;
+  color: #484f58;
+  white-space: nowrap;
+}
+
+/* ─── Tile Tooltip ─────────────────────── */
+#tile-tooltip {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 11px;
+  min-width: 190px;
+  max-width: 260px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.03);
+  line-height: 1.5;
+}
+
+.tt-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
+.tt-pair { font-size: 13px; font-weight: 700; color: #e6edf3; }
+.tt-exch { font-size: 10px; color: #6e7681; }
+.tt-stat { color: #8b949e; font-size: 11px; }
+.tt-divider { border-top: 1px solid #21262d; margin: 6px 0; }
+.tt-pass { color: #3fb950; }
+.tt-pass::before { content: "✓ "; }
+.tt-flag { color: #f85149; font-size: 10.5px; }
+.tt-flag::before { content: "✗ "; }
+
+/* ─── Passing table ────────────────────── */
+table { width: 100%; border-collapse: collapse; }
+th {
+  text-align: left;
+  color: #8b949e;
+  border-bottom: 1px solid #30363d;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+td { padding: 4px 8px; border-bottom: 1px solid #161b22; white-space: nowrap; }
+
+tr.pass { background: #0d1f0d; }
+tr.pass:hover { background: #112611; }
+
+.count { color: #58a6ff; font-weight: normal; }
+.empty { color: #484f58; font-size: 12px; padding: 8px 0; }
+
+footer { margin-top: 32px; }
+.note { color: #484f58; font-size: 11px; }
+
+.pos { color: #3fb950; }
+.neg { color: #f85149; }
+
+/* ─── Animations ───────────────────────── */
+@keyframes row-flash {
+  0%   { filter: brightness(3.5); }
+  100% { filter: brightness(1); }
+}
+.flash { animation: row-flash 0.55s ease-out; }
+.row-stale { opacity: 0.3; }

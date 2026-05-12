@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Funding Scanner</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Funding Rate Scanner</h1>
+    <div id="meta" class="meta">Waiting for first scan…</div>
+    <div id="errors"></div>
+  </header>
+  <main>
+    <section id="sentiment-section">
+      <div class="section-header">
+        <h2>Market Sentiment</h2>
+      </div>
+      <div class="sentiment-grid">
+
+        <div class="sentiment-card">
+          <div class="card-label">FUNDING DIRECTION</div>
+          <div class="meter-wrap">
+            <div class="meter-track">
+              <div class="meter-needle" id="sentiment-needle"></div>
+            </div>
+            <div class="meter-ends"><span>BEAR</span><span>BULL</span></div>
+          </div>
+          <div class="card-value" id="sentiment-label">—</div>
+          <div class="card-sub" id="sentiment-sub">avg — / 8h</div>
+        </div>
+
+        <div class="sentiment-card">
+          <div class="card-label">MARKET HEAT</div>
+          <div class="heat-segs">
+            <div class="heat-seg" id="hs1"></div>
+            <div class="heat-seg" id="hs2"></div>
+            <div class="heat-seg" id="hs3"></div>
+            <div class="heat-seg" id="hs4"></div>
+            <div class="heat-seg" id="hs5"></div>
+          </div>
+          <div class="card-value" id="heat-label">—</div>
+          <div class="card-sub" id="heat-sub">avg |—| / 8h</div>
+        </div>
+
+        <div class="sentiment-card">
+          <div class="card-label">OPEN INTEREST</div>
+          <div class="card-value" id="oi-total">—</div>
+          <div class="card-sub" id="oi-sub">across — pairs</div>
+          <div class="oi-trends">
+            <span class="oi-rise" id="oi-rise">↑ —</span>
+            <span class="oi-stable" id="oi-stable">→ —</span>
+            <span class="oi-fall" id="oi-fall">↓ —</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="tile-section">
+      <div class="section-header">
+        <h2>Market Map</h2>
+        <span id="tile-summary" class="tile-summary"></span>
+      </div>
+      <div id="scan-progress" hidden>
+        <div id="scan-progress-bar"></div>
+        <span id="scan-progress-text" class="scan-progress-text"></span>
+      </div>
+      <div id="tile-map"></div>
+    </section>
+
+    <section id="passing-section">
+      <h2>Passing <span id="passing-count" class="count"></span></h2>
+      <table id="passing-table">
+        <thead>
+          <tr>
+            <th>#</th><th>Pair</th><th>Exch</th><th>Rate/8h</th><th>Ann %</th>
+            <th>Net/cycle</th><th>Basis</th><th>Pred next</th><th>OI</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="passing-empty" class="empty">No passing opportunities this cycle.</p>
+    </section>
+  </main>
+  <footer>
+    <p class="note">Binance rates are 1 period lagged (previous settlement). No current-period bulk endpoint is available.</p>
+  </footer>
+  <div id="tile-tooltip" hidden></div>
+  <script src="/main.js"></script>
+  <script>
+    (function() {
+      var knownId = null;
+      var es = new EventSource('/dev/reload');
+      es.onmessage = function(e) {
+        if (!knownId) { knownId = e.data; return; }
+        if (e.data !== knownId) location.reload();
+      };
+    })();
+  </script>
+</body>
+</html>

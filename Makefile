@@ -13,10 +13,12 @@ dev:
 	npm run dev:dashboard-watch & npm run dev; kill %1 2>/dev/null || true
 
 stop:
-	@pkill -f "tsx watch src/index" 2>/dev/null || true
-	@pkill -f "esbuild.*watch=forever" 2>/dev/null || true
-	@lsof -ti:3000 | xargs kill -9 2>/dev/null || true
-	@echo "stopped"
+	@pgrep -f "tsx watch src/index" | xargs -r kill 2>/dev/null || true
+	@pgrep -f "esbuild.*watch"      | xargs -r kill 2>/dev/null || true
+	@lsof -ti:3000                  | xargs -r kill 2>/dev/null || true
+	@sleep 1
+	@lsof -ti:3000 | xargs -r kill -9 2>/dev/null || true
+	@lsof -ti:3000 >/dev/null 2>&1 && echo "warning: port 3000 still in use" || echo "stopped"
 
 utest:
 	npm run utest

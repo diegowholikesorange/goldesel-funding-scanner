@@ -40,7 +40,7 @@ section { margin-bottom: 28px; }
 /* ─── Market Sentiment ─────────────────── */
 .sentiment-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
 }
 
@@ -274,6 +274,12 @@ footer { margin-top: 32px; }
 
 .pos { color: #3fb950; }
 .neg { color: #f85149; }
+
+/* ─── Regime indicator ─────────────────── */
+.regime-farming  { color: #3fb950; }
+.regime-watching { color: #d29922; }
+.regime-idle     { color: #8b949e; }
+.regime-flip     { color: #f85149; }
 
 /* ─── Animations ───────────────────────── */
 @keyframes row-flash {

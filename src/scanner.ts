@@ -6,7 +6,7 @@ import { rank } from "./ranker";
 // Minimum pause between consecutive symbol scans, per exchange.
 // Binance: 3 req/symbol @ 100ms = ~30 req/s burst max → well under 300/10s raw limit.
 // OKX: no strict IP-ban policy; shorter pause is fine.
-const PAUSE_MS: Record<string, number> = { BINANCE: 100, OKX: 50 };
+const PAUSE_MS: Record<string, number> = { BINANCE: 200, OKX: 200 };
 
 // Symbol registry TTL: re-fetch the full symbol list this often.
 const SYMBOL_TTL_MS   = 60 * 60 * 1000; // 1 hour — on clean refresh

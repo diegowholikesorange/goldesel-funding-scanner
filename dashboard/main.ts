@@ -69,6 +69,15 @@ function flash(el: HTMLElement): void {
 
 // ─── Market Sentiment ─────────────────────────────────────────────────────────
 
+// Thresholds in % per 8h.
+// Fee floor: round-trip 0.30% / 6 hold cycles = 0.05% — rates above this are profitable.
+function regimeLabel(avg: number): { label: string; sub: string; cls: string } {
+  if (avg >= 0.05)  return { label: "FARMING",  sub: "deploy capital",          cls: "regime-farming"  };
+  if (avg > 0)      return { label: "WATCHING", sub: "stay ready",              cls: "regime-watching" };
+  if (avg > -0.01)  return { label: "IDLE",     sub: "hold stables",            cls: "regime-idle"     };
+  return                    { label: "FLIP",     sub: "consider mirror trade",   cls: "regime-flip"     };
+}
+
 function sentimentLabel(avg: number): string {
   if (avg < 0.003) return "FLAT";
   if (avg < 0.008) return "DRIFTING LONG";
@@ -109,6 +118,13 @@ function renderSentiment(s: MarketSentiment): void {
   document.getElementById("oi-rise")!.textContent   = `↑ ${risePct}% rising`;
   document.getElementById("oi-stable")!.textContent = `→ ${stablePct}% stable`;
   document.getElementById("oi-fall")!.textContent   = `↓ ${fallPct}% falling`;
+
+  // Regime
+  const regime = regimeLabel(s.avgFunding8h);
+  const regimeEl = document.getElementById("regime-label")!;
+  regimeEl.textContent = regime.label;
+  regimeEl.className = `card-value ${regime.cls}`;
+  document.getElementById("regime-sub")!.textContent = regime.sub;
 }
 
 // ─── Tooltip ──────────────────────────────────────────────────────────────────

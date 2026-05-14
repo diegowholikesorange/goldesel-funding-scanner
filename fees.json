@@ -1,16 +1,16 @@
 {
   "binance": {
-    "spotMaker": 0.001,
-    "spotTaker": 0.001,
-    "futuresMaker": 0.0005,
-    "futuresTaker": 0.0005,
+    "spotMaker": 0.1,
+    "spotTaker": 0.1,
+    "futuresMaker": 0.05,
+    "futuresTaker": 0.05,
     "bnbDiscount": false
   },
   "okx": {
-    "spotMaker": 0.0008,
-    "spotTaker": 0.001,
-    "futuresMaker": 0.0005,
-    "futuresTaker": 0.0005,
+    "spotMaker": 0.08,
+    "spotTaker": 0.1,
+    "futuresMaker": 0.05,
+    "futuresTaker": 0.05,
     "okbDiscount": false
   }
 }
